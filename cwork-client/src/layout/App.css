@@ -1,0 +1,16 @@
+.category-plus-wrapper {
+  display: flex;
+}
+
+.category-info {
+  display: flex;
+}
+.category-plus-wrapper input {
+  border: 1px dotted blue;
+  padding: 8px;
+  outline: none;
+}
+.error-message {
+  display: flex;
+  float: right;
+}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Cwork.Persistance;
+using Cwork.Service.Implimentation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,6 +32,8 @@ namespace CworkAPI
 
             //Added DataContext as service
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Local")));
+            services.AddScoped<CategoryRepository>();
+
 
             // Enable Cors
             services.AddCors(options =>
@@ -42,6 +45,7 @@ namespace CworkAPI
                         .AllowAnyMethod();
                 });
             });
+            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +56,11 @@ namespace CworkAPI
                 app.UseDeveloperExceptionPage();
             }
             app.UseCors();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
 
             //app.UseHttpsRedirection();
 
