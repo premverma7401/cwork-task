@@ -38,6 +38,8 @@ const Categories = {
   create: (category) => request.post('category/createCategory', category),
   update: (category, id) => request.put(`/updateCategory/${id}`, category),
   delete: (id) => request.post(`category/deleteCategory?id=${id}`),
+  getCategoryByWeight: (number) =>
+    request.get(`category/categoryByWeight?weight=${number}`),
 };
 
 export default { Categories };

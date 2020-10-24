@@ -46,7 +46,18 @@ namespace Cwork.API.Controllers
         {
             return Ok(_repo.DeleteCategory(id));
         }
-
+        [HttpPost]
+        [Route("updateCategory")]
+        public IActionResult UpdateCategory(int id, CategoryModel category)
+        {
+            return Ok(_repo.UpdateCategory(id, category));
+        }
+        [HttpGet]
+        [Route("categoryByWeight")]
+        public IActionResult GetCategoryByWeight(decimal weight)
+        {
+            return Ok(_repo.GetCategoryByWeight(weight));
+        }
 
     }
 }
