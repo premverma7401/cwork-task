@@ -55,27 +55,33 @@ const AddCategory = ({ initialValueMessage, recent }) => {
       >
         <div>
           <div className="category-info">
-            <input
-              type="text"
-              placeholder="Category Name"
-              value={category.categoryName}
-              onChange={handleChange}
-              name="categoryName"
-            />
-            <input
-              type="number"
-              placeholder="Min Weight"
-              value={category.minWeight}
-              onChange={handleChange}
-              name="minWeight"
-            />
-            <input
-              type="number"
-              placeholder="Max Weight"
-              value={category.maxWeight}
-              onChange={handleChange}
-              name="maxWeight"
-            />
+            <Form.Field>
+              <input
+                type="text"
+                placeholder="Category Name"
+                value={category.categoryName}
+                onChange={handleChange}
+                name="categoryName"
+              />
+            </Form.Field>
+            <Form.Field>
+              <input
+                type="number"
+                placeholder="Min Weight"
+                value={category.minWeight}
+                onChange={handleChange}
+                name="minWeight"
+              />
+            </Form.Field>
+            <Form.Field>
+              <input
+                type="number"
+                placeholder="Max Weight"
+                value={category.maxWeight}
+                onChange={handleChange}
+                name="maxWeight"
+              />
+            </Form.Field>
           </div>
           {initialValueMessage ? (
             <Message content={initialValueMessage}></Message>
@@ -86,12 +92,14 @@ const AddCategory = ({ initialValueMessage, recent }) => {
         </div>
 
         <div>
-          <Button
-            icon="plus"
-            content="Submit"
-            primary
-            disabled={!category.maxWeight}
-          />
+          <Form.Field>
+            <Button
+              icon="plus"
+              content="Submit"
+              primary
+              disabled={!category.maxWeight}
+            />
+          </Form.Field>
         </div>
       </Form>
     </Fragment>

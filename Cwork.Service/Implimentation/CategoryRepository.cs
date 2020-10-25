@@ -1,6 +1,5 @@
 using Cwork.Domain.Models.Input;
 using Cwork.Persistance;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +37,10 @@ namespace Cwork.Service.Implimentation
         public CategoryModel GetRecentCategory()
         {
             var categories = _data.Categories.OrderByDescending(x => x.MaxWeight).First();
+            if (categories == null)
+            {
+                throw new Exception("Not Found");
+            }
             return categories;
         }
 

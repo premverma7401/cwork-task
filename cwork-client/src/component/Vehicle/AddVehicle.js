@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
-import { Button, Form, Label, Message } from 'semantic-ui-react';
+import { Button, Form, Grid, Label, Message, Segment } from 'semantic-ui-react';
 import agent from '../../api/agent';
 import AssignedCategory from '../../common/AssignedCategory';
 import ManufacturerList from '../../common/ManufacturerList';
 
 const AddVehicle = () => {
-  const [vehicle, setVehicle] = useState({
+  const initState = {
     ownerName: '',
-    manufacturer: '',
+    manufacturingId: '',
     year: '',
     weight: '',
     category: '',
-  });
+  };
+  const [vehicle, setVehicle] = useState(initState);
   const [categoryAssigned, setCategoryAssigned] = useState({
     categoryName: '',
     categoryIcon: '',
@@ -23,38 +24,44 @@ const AddVehicle = () => {
     e.preventDefault();
     const vehicleDetails = { ...vehicle };
     vehicleDetails[e.target.name] = e.target.value;
-    if (vehicleDetails.weight) {
-      assignCategory(vehicleDetails.weight);
-      console.log('this is fired from onchANGE');
-    }
+    vehicleDetails.manufacturingId = Number.parseInt(
+      vehicleDetails.manufacturingId
+    );
+    vehicleDetails.weight = Number.parseFloat(vehicleDetails.weight);
     setVehicle(vehicleDetails);
     console.log(vehicle, 'from2');
   };
   const assignCategory = async (number) => {
-    try {
-      const categoryAssigned = await agent.Categories.getCategoryByWeight(
-        number
-      );
-      if (categoryAssigned === 'Not Found') {
-        // setCategoryAssigned({
-        //   ...categoryAssigned,
-        //   errorText: 'No Category assigned for this range',
-        // });
-        console.log('not found');
-      } else {
+    if (!vehicle.weight) {
+      toast.error('Please insert weight of the vehicle');
+    } else {
+      try {
+        const categoryAssigned = await agent.Categories.getCategoryByWeight(
+          number
+        );
+        console.log(categoryAssigned);
         setCategoryAssigned(categoryAssigned);
+        setVehicle({ ...vehicle, category: categoryAssigned.categoryId });
+        toast.success(`Category Assigned as ${categoryAssigned.categoryName} `);
+      } catch (error) {
+        toast.error('No Category available for this Weight.');
+        console.log(error);
       }
-      //   toast.success(`Category Assigned as ${categoryAssigned.categoryName} `);
-    } catch (error) {
-      console.log(error);
     }
   };
 
-  const handleSubmit = () => {
-    console.log('submitted');
+  const handleSubmit = async () => {
+    try {
+      await agent.Vehicle.create(vehicle);
+      toast.success('Vehicle Added');
+      console.log('submitted', vehicle);
+      setVehicle(initState);
+    } catch (error) {
+      toast.error('Error Occurred');
+    }
   };
   return (
-    <div>
+    <Segment>
       <Form onSubmit={handleSubmit} autoComplete="off">
         <Form.Field>
           <input
@@ -63,6 +70,7 @@ const AddVehicle = () => {
             value={vehicle.name}
             onChange={handleChange}
             name="ownerName"
+            required
           />
         </Form.Field>
         <Form.Field>
@@ -72,40 +80,58 @@ const AddVehicle = () => {
             value={vehicle.year}
             onChange={handleChange}
             name="year"
+            required
+            min="1980"
+            max="2022"
+            step="1"
           />
         </Form.Field>
         <Form.Field>
-          <ManufacturerList />
+          <ManufacturerList
+            name="manufacturingId"
+            onChange={handleChange}
+            value={vehicle.manufacturingId}
+          />
         </Form.Field>
-        <Form.Field>
+
+        <Form.Field inline>
           <input
             type="number"
             placeholder="Weight"
             value={vehicle.weight}
             onChange={handleChange}
             name="weight"
+            required
           />
-        </Form.Field>
 
-        <Form.Field>
-          <Message>
-            <Label as="a" color="teal" floating>
-              Assign Category
-            </Label>
-          </Message>
-          <AssignedCategory
-            name={categoryAssigned.categoryName}
-            error={categoryAssigned.errorText}
-          />
+          <Label
+            as="a"
+            basic
+            color="blue"
+            pointing="left"
+            onClick={() => assignCategory(vehicle.weight)}
+          >
+            Assign Category
+          </Label>
         </Form.Field>
+        <AssignedCategory
+          name="category"
+          onChange={handleChange}
+          value={categoryAssigned.categoryName}
+        />
 
         <ToastContainer />
 
         <div>
-          <Button icon="plus" content="Submit" primary />
+          <Button
+            icon="plus"
+            content="Submit"
+            primary
+            disabled={!vehicle.category || !vehicle.manufacturingId}
+          />
         </div>
       </Form>
-    </div>
+    </Segment>
   );
 };
 

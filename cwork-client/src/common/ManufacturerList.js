@@ -1,18 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import agent from '../api/agent';
+const ManufacturerList = ({ name, onChange, value }) => {
+  const [manufacturers, setManufacturers] = useState([]);
 
-const ManufacturerList = ({ name, onChange }) => {
-  const [manufacturers, setManufacturers] = useState([
-    { key: 'c', text: 'Honda', value: '0' },
-    { key: 'p', text: 'Audi', value: '1' },
-    { key: 'f', text: 'Toyota', value: '2' },
-    { key: 't', text: 'Holden', value: '3' },
-  ]);
+  const getManufacturerList = async () => {
+    try {
+      const manufacturers = await agent.Manufacturer.list();
+      console.log(manufacturers);
+      setManufacturers(manufacturers);
+    } catch (error) {}
+  };
+  useEffect(() => {
+    getManufacturerList();
+  }, []);
   return (
     <select htmlFor="manufacturers" name={name} onChange={onChange}>
       <option value="">Select Manufacturer</option>
       {manufacturers.map((manufacturer) => (
-        <option key={manufacturer.key} value={manufacturer.value}>
-          {manufacturer.text}
+        <option
+          key={manufacturer.manufacturingId}
+          value={manufacturer.manufacturingId}
+        >
+          {manufacturer.manufacturerName}
         </option>
       ))}
     </select>

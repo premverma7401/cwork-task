@@ -42,4 +42,13 @@ const Categories = {
     request.get(`category/categoryByWeight?weight=${number}`),
 };
 
-export default { Categories };
+const Vehicle = {
+  list: () => request.post('vehicle/listVehicles/'),
+  create: (vehicle) => request.post('vehicle/createVehicle', vehicle),
+};
+const Manufacturer = {
+  list: () => request.post('manufacturer/listManufacturers/'),
+  create: (manufacturer) =>
+    request.post('manufacturer/createManufacturer', manufacturer),
+};
+export default { Categories, Vehicle, Manufacturer };

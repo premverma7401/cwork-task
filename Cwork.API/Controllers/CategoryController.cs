@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Cwork.Domain.Models.Input;
+﻿using Cwork.Domain.Models.Input;
 using Cwork.Service.Implimentation;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cwork.API.Controllers

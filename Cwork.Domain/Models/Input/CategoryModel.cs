@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Cwork.Domain.Models.Input
 {
@@ -9,9 +6,12 @@ namespace Cwork.Domain.Models.Input
     {
         [Key]
         public int CategoryId { get; set; }
+        [Required]
         public string CategoryName { get; set; }
+        [Required]
         public decimal MinWeight { get; set; }
+        [Required]
         public decimal MaxWeight { get; set; }
-        //public string Icon { get; set; }
+        public string Icon { get; set; }
     }
 }
