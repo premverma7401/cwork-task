@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Cwork.Domain.Models.Input
 {
@@ -15,13 +16,14 @@ namespace Cwork.Domain.Models.Input
 
         public decimal Weight { get; set; }
         [Required]
-
+        [ForeignKey("ManufacturerModel")]
         public int ManufacturingId { get; set; }
         [Required]
+        [ForeignKey("CategoryModel")]
 
         public int CategoryId { get; set; }
 
-        public ManufacturerModel Manufacturer { get; set; }
-        public CategoryModel Category { get; set; }
+        public ManufacturerModel ManufacturerModel { get; set; }
+        public CategoryModel CategoryModel { get; set; }
     }
 }

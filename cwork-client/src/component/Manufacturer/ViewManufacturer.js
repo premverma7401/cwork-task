@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, List, Segment } from 'semantic-ui-react';
 import agent from '../../api/agent';
 
@@ -21,7 +21,7 @@ const ViewManufacturer = () => {
       <h3> View Manufacturers</h3>
       <List animated size="huge" selection divided>
         {manufacturers.map((manufacturer) => (
-          <List.Item key={manufacturer.id}>
+          <List.Item key={manufacturer.manufacturingId}>
             <Image avatar src="https://loremflickr.com/420/420/car" />
             <List.Content>
               <List.Header>{manufacturer.manufacturerName}</List.Header>

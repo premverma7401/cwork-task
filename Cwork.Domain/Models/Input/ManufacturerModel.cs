@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Cwork.Domain.Models.Input
 {
@@ -8,5 +9,7 @@ namespace Cwork.Domain.Models.Input
         public int ManufacturingId { get; set; }
         [Required]
         public string ManufacturerName { get; set; }
+        public List<VehicleModel> VehicleModels { get; set; }
+
     }
 }

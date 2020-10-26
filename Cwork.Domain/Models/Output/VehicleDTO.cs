@@ -10,7 +10,7 @@ namespace Cwork.Domain.Models.Output
         public string OwnerName { get; set; }
         public string Year { get; set; }
         public decimal Weight { get; set; }
-        public int Category { get; set; }
+        public int CategoryId { get; set; }
         public int ManufacturingId { get; set; }
 
     }

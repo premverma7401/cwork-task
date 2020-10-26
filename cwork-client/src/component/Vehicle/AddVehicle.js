@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
-import { Button, Form, Grid, Label, Message, Segment } from 'semantic-ui-react';
+import { Button, Form, Label, Segment } from 'semantic-ui-react';
+import { history } from '../..';
 import agent from '../../api/agent';
 import AssignedCategory from '../../common/AssignedCategory';
 import ManufacturerList from '../../common/ManufacturerList';
@@ -11,7 +12,14 @@ const AddVehicle = () => {
     manufacturingId: '',
     year: '',
     weight: '',
-    category: '',
+    categoryId: '',
+  };
+  const resetState = {
+    ownerName: '',
+    manufacturingId: null,
+    year: '',
+    weight: '',
+    categoryId: null,
   };
   const [vehicle, setVehicle] = useState(initState);
   const [categoryAssigned, setCategoryAssigned] = useState({
@@ -41,7 +49,7 @@ const AddVehicle = () => {
         );
         console.log(categoryAssigned);
         setCategoryAssigned(categoryAssigned);
-        setVehicle({ ...vehicle, category: categoryAssigned.categoryId });
+        setVehicle({ ...vehicle, categoryId: categoryAssigned.categoryId });
         toast.success(`Category Assigned as ${categoryAssigned.categoryName} `);
       } catch (error) {
         toast.error('No Category available for this Weight.');
@@ -54,8 +62,8 @@ const AddVehicle = () => {
     try {
       await agent.Vehicle.create(vehicle);
       toast.success('Vehicle Added');
+      history.push('/user');
       console.log('submitted', vehicle);
-      setVehicle(initState);
     } catch (error) {
       toast.error('Error Occurred');
     }
@@ -127,7 +135,7 @@ const AddVehicle = () => {
             icon="plus"
             content="Submit"
             primary
-            disabled={!vehicle.category || !vehicle.manufacturingId}
+            disabled={!vehicle.categoryId || !vehicle.manufacturingId}
           />
         </div>
       </Form>

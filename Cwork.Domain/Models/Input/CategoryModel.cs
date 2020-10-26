@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Cwork.Domain.Models.Input
 {
@@ -13,5 +14,7 @@ namespace Cwork.Domain.Models.Input
         [Required]
         public decimal MaxWeight { get; set; }
         public string Icon { get; set; }
+        public List<VehicleModel> VehicleModels { get; set; }
+
     }
 }

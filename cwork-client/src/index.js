@@ -4,11 +4,12 @@ import './layout/index.css';
 import App from './layout/App';
 import 'semantic-ui-css/semantic.min.css';
 import 'react-toastify/dist/ReactToastify.css';
-import { BrowserRouter } from 'react-router-dom';
-
+import { Router } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+export const history = createBrowserHistory();
 ReactDOM.render(
-  <BrowserRouter>
+  <Router history={history}>
     <App />
-  </BrowserRouter>,
+  </Router>,
   document.getElementById('root')
 );
