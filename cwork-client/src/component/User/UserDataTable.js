@@ -91,7 +91,7 @@ const UserDataTable = () => {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {data.map((userInfo, i) => (
+        {vehicleData.map((userInfo, i) => (
           <Table.Row key={i}>
             <Table.Cell>{userInfo.ownerName}</Table.Cell>
             <Table.Cell>{userInfo.manufacturerName}</Table.Cell>
