@@ -13,7 +13,6 @@ axios.interceptors.response.use(undefined, (error) => {
   // check if status 404
   if (status === 404) {
     // history.push('/notfound');
-    // History object from export const history = createBrowserHistory();
   }
   // check if 500 internal server
   if (status === 500) {
@@ -40,6 +39,7 @@ const Categories = {
   delete: (id) => request.post(`category/deleteCategory?id=${id}`),
   getCategoryByWeight: (number) =>
     request.get(`category/categoryByWeight?weight=${number}`),
+  details: (id) => request.get(`category/categoryById?id=${id}`),
 };
 
 const Vehicle = {

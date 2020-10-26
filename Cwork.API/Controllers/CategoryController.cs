@@ -1,5 +1,6 @@
 ﻿using Cwork.Domain.Models.Input;
 using Cwork.Service.Implimentation;
+using Cwork.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cwork.API.Controllers
@@ -8,9 +9,9 @@ namespace Cwork.API.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly CategoryRepository _repo;
+        private readonly ICategoryRepository _repo;
 
-        public CategoryController(CategoryRepository repo)
+        public CategoryController(ICategoryRepository repo)
         {
             _repo = repo;
         }
@@ -52,6 +53,12 @@ namespace Cwork.API.Controllers
         public IActionResult GetCategoryByWeight(decimal weight)
         {
             return Ok(_repo.GetCategoryByWeight(weight));
+        }
+        [HttpGet]
+        [Route("categoryById")]
+        public IActionResult GetCategoryById(int id)
+        {
+            return Ok(_repo.GetCategoryById(id));
         }
 
     }

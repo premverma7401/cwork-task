@@ -1,11 +1,14 @@
 ﻿using Cwork.Domain.Models.Input;
 using Cwork.Persistance;
+using Cwork.Service.Interface;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Cwork.Service.Implimentation
 {
-    public class ManufacturerRepository
+
+
+    public class ManufacturerRepository : IManufacturerRepository
     {
         private readonly DataContext _data;
 

@@ -6,6 +6,7 @@ using Cwork.Domain.Models.Input;
 using Cwork.Domain.Models.Output;
 using Cwork.Persistance;
 using Cwork.Service.Implimentation;
+using Cwork.Service.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,8 +16,8 @@ namespace Cwork.API.Controllers
     [ApiController]
     public class VehicleController : ControllerBase
     {
-        private readonly VehicleRepository _repo;
-        public VehicleController(VehicleRepository repo)
+        private readonly IVehicleRepository _repo;
+        public VehicleController(IVehicleRepository repo)
         {
             _repo = repo;
         }

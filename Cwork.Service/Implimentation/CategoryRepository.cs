@@ -1,12 +1,16 @@
+using System.Security.Cryptography.X509Certificates;
 using Cwork.Domain.Models.Input;
 using Cwork.Persistance;
+using Cwork.Service.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Cwork.Service.Implimentation
 {
-    public class CategoryRepository
+
+
+    public class CategoryRepository : ICategoryRepository
     {
         private readonly DataContext _data;
 
@@ -21,7 +25,8 @@ namespace Cwork.Service.Implimentation
             {
                 CategoryName = model.CategoryName,
                 MinWeight = model.MinWeight,
-                MaxWeight = model.MaxWeight
+                MaxWeight = model.MaxWeight,
+                Icon = model.Icon
             };
             _data.Categories.Add(category);
             return _data.SaveChanges();
@@ -42,6 +47,12 @@ namespace Cwork.Service.Implimentation
                 throw new Exception("Not Found");
             }
             return categories;
+        }
+
+        public CategoryModel GetCategoryById(int id)
+        {
+            var category = _data.Categories.Where(x => x.CategoryId == id).FirstOrDefault();
+            return category;
         }
 
         public int DeleteCategory(int id)

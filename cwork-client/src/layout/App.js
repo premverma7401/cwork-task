@@ -9,6 +9,7 @@ import CategoryDashboard from '../component/Category/CategoryDashboard';
 import ManufacturingDashboard from '../component/Manufacturer/ManufacturingDashboard';
 import VehicleDashboard from '../component/Vehicle/VehicleDashboard';
 import Navbar from '../common/Navbar';
+import { UserDataProvider } from '../store/UserDataContext';
 
 const App = () => {
   return (
@@ -19,20 +20,22 @@ const App = () => {
         render={() => (
           <Fragment>
             <Navbar />
-            <Container style={{ marginTop: '7em' }}>
-              <Switch>
-                <Route component={Dashboard} path="/dashboard" />
-                <Route component={AdminDashboard} path="/admin" />
-                <Route component={UserDashboard} path="/user" />
-                <Route component={VehicleDashboard} path="/vehicle" exact />
-                <Route
-                  component={ManufacturingDashboard}
-                  path="/manufacturer"
-                />
-                <Route component={CategoryDashboard} path="/categories" />
-                {/* <Route component={NotFound} /> */}
-              </Switch>
-            </Container>
+            <UserDataProvider>
+              <Container style={{ marginTop: '7em' }}>
+                <Switch>
+                  <Route component={Dashboard} path="/dashboard" />
+                  <Route component={AdminDashboard} path="/admin" />
+                  <Route component={UserDashboard} path="/user"></Route>
+                  <Route component={VehicleDashboard} path="/vehicle" exact />
+                  <Route
+                    component={ManufacturingDashboard}
+                    path="/manufacturer"
+                  />
+                  <Route component={CategoryDashboard} path="/categories" />
+                  {/* <Route component={NotFound} /> */}
+                </Switch>
+              </Container>
+            </UserDataProvider>
           </Fragment>
         )}
       />

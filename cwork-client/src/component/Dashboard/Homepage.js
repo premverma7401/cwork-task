@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Segment, Header, Button, Image } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-
+import '../../layout/App.css';
 const Homepage = () => {
   return (
     <Segment inverted textAlign="center" vertical className="masthead">
@@ -9,9 +9,9 @@ const Homepage = () => {
         <Header as="h1" inverted>
           <Image
             size="massive"
-            src="/assets/logo.png"
+            src="/cworks-logo.png"
             alt="logo"
-            style={{ marginBottom: 12 }}
+            style={{ marginBottom: 12, width: '100px' }}
           />
           CreditWorks
         </Header>

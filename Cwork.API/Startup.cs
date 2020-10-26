@@ -1,5 +1,6 @@
 using Cwork.Persistance;
 using Cwork.Service.Implimentation;
+using Cwork.Service.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -25,9 +26,9 @@ namespace CworkAPI
 
             //Added DataContext as service
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Local")));
-            services.AddScoped<CategoryRepository>();
-            services.AddScoped<ManufacturerRepository>();
-            services.AddScoped<VehicleRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IManufacturerRepository, ManufacturerRepository>();
+            services.AddScoped<IVehicleRepository, VehicleRepository>();
 
 
             // Enable Cors

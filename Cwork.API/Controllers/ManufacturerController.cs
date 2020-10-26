@@ -1,5 +1,6 @@
 ﻿using Cwork.Domain.Models.Input;
 using Cwork.Service.Implimentation;
+using Cwork.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cwork.API.Controllers
@@ -8,9 +9,9 @@ namespace Cwork.API.Controllers
     [ApiController]
     public class ManufacturerController : ControllerBase
     {
-        private readonly ManufacturerRepository _repo;
+        private readonly IManufacturerRepository _repo;
 
-        public ManufacturerController(ManufacturerRepository repo)
+        public ManufacturerController(IManufacturerRepository repo)
         {
             _repo = repo;
         }

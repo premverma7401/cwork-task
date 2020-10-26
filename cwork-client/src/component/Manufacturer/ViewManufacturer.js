@@ -19,7 +19,7 @@ const ViewManufacturer = () => {
   return (
     <Segment>
       <h3> View Manufacturers</h3>
-      <List animated size="huge" selection divided>
+      <List animated size="large" selection divided>
         {manufacturers.map((manufacturer) => (
           <List.Item key={manufacturer.manufacturingId}>
             <Image avatar src="https://loremflickr.com/420/420/car" />

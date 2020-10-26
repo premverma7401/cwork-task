@@ -1,6 +1,7 @@
 ﻿using Cwork.Domain.Models.Input;
 using Cwork.Domain.Models.Output;
 using Cwork.Persistance;
+using Cwork.Service.Interface;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,9 @@ using System.Linq;
 
 namespace Cwork.Service.Implimentation
 {
-    public class VehicleRepository
+
+
+    public class VehicleRepository : IVehicleRepository
     {
         private readonly DataContext _data;
 
@@ -35,7 +38,7 @@ namespace Cwork.Service.Implimentation
 
         public List<VehicleListDTO> GetAllVehicles()
         {
-            var vehicles = _data.Vehicles.Include(c => c.CategoryModel).Include(m => m.ManufacturerModel).ToList();
+            var vehicles = _data.Vehicles.Include(c => c.CategoryModel).Include(m => m.ManufacturerModel).OrderByDescending(x => x.CategoryId).ToList();
             Console.WriteLine(vehicles);
             return vehicles.Select(c => new VehicleListDTO
             {

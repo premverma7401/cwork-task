@@ -4,15 +4,14 @@ import { Link, NavLink } from 'react-router-dom';
 
 const Navbar = () => {
   return (
-    <Menu inverted fixed="top">
+    <Menu fixed="top">
       <Container>
         <Menu.Item header as={NavLink} exact to="/">
           <img
-            src="/assets/prem.png"
+            src="/cworks-logo.png"
             alt="logo"
-            style={{ marginRight: '10px' }}
+            style={{ marginRight: '10px', width: '170px' }}
           />
-          CreditWorks
         </Menu.Item>
         <Menu.Item name="Vehicle" as={NavLink} to="/vehicle" />
         <Menu.Item name="Manufacturers" as={Link} to="/manufacturer" />

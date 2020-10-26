@@ -13,7 +13,7 @@ namespace Cwork.Domain.Models.Input
 
         public string Year { get; set; }
         [Required]
-
+        [Column(TypeName = "decimal(18, 2)")]
         public decimal Weight { get; set; }
         [Required]
         [ForeignKey("ManufacturerModel")]

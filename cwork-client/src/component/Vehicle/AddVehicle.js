@@ -1,73 +1,16 @@
-import React, { useState } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
+import React from 'react';
+import { ToastContainer } from 'react-toastify';
 import { Button, Form, Label, Segment } from 'semantic-ui-react';
-import { history } from '../..';
-import agent from '../../api/agent';
 import AssignedCategory from '../../common/AssignedCategory';
 import ManufacturerList from '../../common/ManufacturerList';
 
-const AddVehicle = () => {
-  const initState = {
-    ownerName: '',
-    manufacturingId: '',
-    year: '',
-    weight: '',
-    categoryId: '',
-  };
-  const resetState = {
-    ownerName: '',
-    manufacturingId: null,
-    year: '',
-    weight: '',
-    categoryId: null,
-  };
-  const [vehicle, setVehicle] = useState(initState);
-  const [categoryAssigned, setCategoryAssigned] = useState({
-    categoryName: '',
-    categoryIcon: '',
-    errorText: '',
-  });
-
-  const handleChange = (e) => {
-    e.preventDefault();
-    const vehicleDetails = { ...vehicle };
-    vehicleDetails[e.target.name] = e.target.value;
-    vehicleDetails.manufacturingId = Number.parseInt(
-      vehicleDetails.manufacturingId
-    );
-    vehicleDetails.weight = Number.parseFloat(vehicleDetails.weight);
-    setVehicle(vehicleDetails);
-    console.log(vehicle, 'from2');
-  };
-  const assignCategory = async (number) => {
-    if (!vehicle.weight) {
-      toast.error('Please insert weight of the vehicle');
-    } else {
-      try {
-        const categoryAssigned = await agent.Categories.getCategoryByWeight(
-          number
-        );
-        console.log(categoryAssigned);
-        setCategoryAssigned(categoryAssigned);
-        setVehicle({ ...vehicle, categoryId: categoryAssigned.categoryId });
-        toast.success(`Category Assigned as ${categoryAssigned.categoryName} `);
-      } catch (error) {
-        toast.error('No Category available for this Weight.');
-        console.log(error);
-      }
-    }
-  };
-
-  const handleSubmit = async () => {
-    try {
-      await agent.Vehicle.create(vehicle);
-      toast.success('Vehicle Added');
-      history.push('/user');
-      console.log('submitted', vehicle);
-    } catch (error) {
-      toast.error('Error Occurred');
-    }
-  };
+const AddVehicle = ({
+  handleSubmit,
+  assignCategory,
+  handleChange,
+  vehicle,
+  categoryAssigned,
+}) => {
   return (
     <Segment>
       <Form onSubmit={handleSubmit} autoComplete="off">
@@ -109,7 +52,8 @@ const AddVehicle = () => {
             value={vehicle.weight}
             onChange={handleChange}
             name="weight"
-            required
+            min="0"
+            step=".01"
           />
 
           <Label
