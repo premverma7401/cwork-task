@@ -23,6 +23,12 @@ const UserDataTable = () => {
           data: _.sortBy(state.data, [action.column]),
           direction: 'ascending',
         };
+
+      case 'SET_VEHICLE':
+        return {
+          ...state,
+          data: action.data,
+        };
       default:
         throw new Error();
     }
@@ -37,7 +43,7 @@ const UserDataTable = () => {
   const getVehicleData = async () => {
     try {
       const vehicleData = await agent.Vehicle.list();
-      dispatch({ type: 'CHANGE_SORT', data: vehicleData });
+      dispatch({ type: 'SET_VEHICLE', data: vehicleData });
       setVehicleData(vehicleData);
       toast.success('Vehicle data received');
     } catch (error) {
@@ -91,7 +97,7 @@ const UserDataTable = () => {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {vehicleData.map((userInfo, i) => (
+        {data.map((userInfo, i) => (
           <Table.Row key={i}>
             <Table.Cell>{userInfo.ownerName}</Table.Cell>
             <Table.Cell>{userInfo.manufacturerName}</Table.Cell>
@@ -106,5 +112,4 @@ const UserDataTable = () => {
     </Table>
   );
 };
-
 export default UserDataTable;
