@@ -8,7 +8,6 @@ export const UserDataProvider = (props) => {
   const getVehicleData = async () => {
     try {
       const vehicleData = await agent.Vehicle.list();
-      console.log(vehicleData);
       setVehicleData(vehicleData);
       toast.success('Vehicle data received');
     } catch (error) {

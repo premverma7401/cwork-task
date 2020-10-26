@@ -1,4 +1,5 @@
 ﻿using Cwork.Domain.Models.Input;
+using Cwork.Domain.Models.Output;
 using Cwork.Service.Implimentation;
 using Cwork.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
@@ -44,7 +45,7 @@ namespace Cwork.API.Controllers
         }
         [HttpPost]
         [Route("updateCategory")]
-        public IActionResult UpdateCategory(int id, CategoryModel category)
+        public IActionResult UpdateCategory(int id, CategoryUpdateDTO category)
         {
             return Ok(_repo.UpdateCategory(id, category));
         }

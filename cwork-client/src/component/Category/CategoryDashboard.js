@@ -20,7 +20,6 @@ const CategoryDashboard = () => {
   const checkFirstCategoryEntry = async () => {
     try {
       const categoryStatus = await agent.Categories.list();
-      console.log(categoryStatus);
       if (categoryStatus.length === 0) {
         setInitialValueMessage(
           'Min Weight should start from 0, as this is your first category in database'
@@ -37,7 +36,6 @@ const CategoryDashboard = () => {
     try {
       const recentCategory = await agent.Categories.recent();
       setRecentCategory(recentCategory);
-      console.log(recentCategory, 'value');
     } catch (error) {}
   };
 
@@ -59,7 +57,6 @@ const CategoryDashboard = () => {
       categoryValue.maxWeight = Number.parseFloat(categoryValue.maxWeight);
       setCategory(categoryValue);
     }
-    console.log(category);
   };
 
   const handleSubmit = () => {
@@ -69,7 +66,6 @@ const CategoryDashboard = () => {
         minWeight: category.minWeight,
         maxWeight: (category.maxWeight = category.minWeight + 1),
       });
-      console.log(category);
       toast.error(`Max weight should be greater than min weight`);
     } else {
       setCategory({
@@ -80,20 +76,19 @@ const CategoryDashboard = () => {
       });
       agent.Categories.create(category);
       toast.success('Category added!!');
-      // listCategories.push(category);
       setCategory(categoryInitState);
     }
   };
   const handleDelete = (e, id) => {
     e.preventDefault();
-    console.log(id);
     toast.error('You have deleted the category...');
     agent.Categories.delete(id);
   };
   const sendUpdatedData = async (c, id) => {
     c.preventDefault();
     try {
-      agent.Categories.update(id, category);
+      agent.Categories.update(id);
+      console.log(category, id);
       toast.success('Updated Succesfully');
     } catch (error) {
       console.log(error);
@@ -102,7 +97,6 @@ const CategoryDashboard = () => {
 
   const handleUpdate = async (u, id) => {
     u.preventDefault();
-
     try {
       const category = await agent.Categories.details(id);
       setCategory(category);
@@ -110,8 +104,6 @@ const CategoryDashboard = () => {
     } catch (error) {
       console.log(error);
     }
-    // agent.Categories.update(id,category)
-    console.log(id);
   };
   return (
     <Grid>

@@ -18,7 +18,6 @@ const UserDataTable = () => {
               state.direction === 'ascending' ? 'descending' : 'ascending',
           };
         }
-        console.log(state);
         return {
           column: action.column,
           data: _.sortBy(state.data, [action.column]),
@@ -38,7 +37,6 @@ const UserDataTable = () => {
   const getVehicleData = async () => {
     try {
       const vehicleData = await agent.Vehicle.list();
-      console.log(vehicleData);
       dispatch({ type: 'CHANGE_SORT', data: vehicleData });
       setVehicleData(vehicleData);
       toast.success('Vehicle data received');
@@ -93,7 +91,7 @@ const UserDataTable = () => {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {vehicleData.map((userInfo, i) => (
+        {data.map((userInfo, i) => (
           <Table.Row key={i}>
             <Table.Cell>{userInfo.ownerName}</Table.Cell>
             <Table.Cell>{userInfo.manufacturerName}</Table.Cell>

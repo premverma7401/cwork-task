@@ -37,7 +37,6 @@ const VehicleDashboard = () => {
     );
     vehicleDetails.weight = Number.parseFloat(vehicleDetails.weight);
     setVehicle(vehicleDetails);
-    console.log(vehicle, 'from2');
   };
   const assignCategory = async (number) => {
     if (!vehicle.weight) {
@@ -47,7 +46,6 @@ const VehicleDashboard = () => {
         const categoryAssigned = await agent.Categories.getCategoryByWeight(
           number
         );
-        console.log(categoryAssigned);
         setCategoryAssigned(categoryAssigned);
         setVehicle({ ...vehicle, categoryId: categoryAssigned.categoryId });
         toast.success(`Category Assigned as ${categoryAssigned.categoryName} `);
@@ -63,7 +61,6 @@ const VehicleDashboard = () => {
       await agent.Vehicle.create(vehicle);
       toast.success('Vehicle Added');
       history.push('/user');
-      console.log('submitted', vehicle);
     } catch (error) {
       toast.error('Error Occurred');
     }

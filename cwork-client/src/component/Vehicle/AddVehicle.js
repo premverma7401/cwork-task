@@ -70,6 +70,7 @@ const AddVehicle = ({
           name="category"
           onChange={handleChange}
           value={categoryAssigned.categoryName}
+          icon={categoryAssigned.icon}
         />
 
         <ToastContainer />

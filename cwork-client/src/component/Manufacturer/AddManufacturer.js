@@ -12,7 +12,6 @@ const AddManufacturer = () => {
     e.preventDefault();
     const { name, value } = e.target;
     setManufacturer({ ...manufacturer, [name]: value });
-    console.log(manufacturer);
   };
   const handleSubmit = async () => {
     try {

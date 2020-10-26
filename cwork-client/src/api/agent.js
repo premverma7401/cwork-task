@@ -35,7 +35,7 @@ const Categories = {
   list: () => request.post('category/listCategories/'),
   recent: () => request.post('category/recentCategory/'),
   create: (category) => request.post('category/createCategory', category),
-  update: (category, id) => request.put(`/updateCategory/${id}`, category),
+  update: (id, category) => request.put(`/updateCategory/${id}`, category),
   delete: (id) => request.post(`category/deleteCategory?id=${id}`),
   getCategoryByWeight: (number) =>
     request.get(`category/categoryByWeight?weight=${number}`),

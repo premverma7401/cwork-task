@@ -1,9 +1,9 @@
 import React from 'react';
 import { Message } from 'semantic-ui-react';
 
-const AssignedCategory = ({ value }) => {
+const AssignedCategory = ({ value, icon }) => {
   return (
-    <Message icon="inbox" header={` Category Assigned : ${value}`} compact />
+    <Message icon={icon} header={` Category Assigned : ${value}`} compact />
   );
 };
 

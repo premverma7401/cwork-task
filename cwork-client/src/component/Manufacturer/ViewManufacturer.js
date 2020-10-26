@@ -8,7 +8,6 @@ const ViewManufacturer = () => {
   const getManufacturerList = async () => {
     try {
       const manufacturers = await agent.Manufacturer.list();
-      console.log(manufacturers);
       setManufacturers(manufacturers);
     } catch (error) {}
   };

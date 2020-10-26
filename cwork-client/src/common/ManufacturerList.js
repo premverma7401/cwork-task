@@ -6,9 +6,10 @@ const ManufacturerList = ({ name, onChange, value }) => {
   const getManufacturerList = async () => {
     try {
       const manufacturers = await agent.Manufacturer.list();
-      console.log(manufacturers);
       setManufacturers(manufacturers);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
   useEffect(() => {
     getManufacturerList();

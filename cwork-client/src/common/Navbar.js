@@ -17,7 +17,9 @@ const Navbar = () => {
         <Menu.Item name="Manufacturers" as={Link} to="/manufacturer" />
         <Menu.Item name="Categories" as={Link} to="/categories" />
         <Menu.Item position="right" as={Link} to="/user">
-          <Button>User View</Button>
+          <Button primary color="google plus">
+            User View
+          </Button>
         </Menu.Item>
       </Container>
     </Menu>
